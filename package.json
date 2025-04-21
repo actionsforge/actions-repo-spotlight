@@ -1,0 +1,44 @@
+{
+  "name": "actions-repo-spotlight",
+  "version": "1.0.0",
+  "description": "GitHub Action to auto-pin your most visited repositories using the GitHub API",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "repo-spotlight": "./index.js"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:ci": "vitest run --reporter=verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/actionsforge/actions-repo-spotlight.git"
+  },
+  "keywords": [
+    "github-action",
+    "pinned-repos",
+    "spotlight",
+    "repo-analytics",
+    "graphql",
+    "gh-api"
+  ],
+  "author": "actionsforge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/actionsforge/actions-repo-spotlight/issues"
+  },
+  "homepage": "https://github.com/actionsforge/actions-repo-spotlight#readme",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.1.1",
+    "vitest": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

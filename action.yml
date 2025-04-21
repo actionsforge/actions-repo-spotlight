@@ -1,0 +1,36 @@
+name: "Repo Spotlight"
+description: "GitHub Action to report your most visited repositories using the GitHub API."
+
+inputs:
+  token:
+    description: "GitHub token (PAT with repo access)"
+    required: true
+
+  delay:
+    description: "Delay (in ms) between traffic API requests"
+    required: false
+    default: "300"
+
+  limit:
+    description: "Maximum number of repos to report"
+    required: false
+    default: "6"
+
+  min_views:
+    description: "Minimum view count for a repo to be included"
+    required: false
+    default: "0"
+
+  include_forks:
+    description: "Include forked repos (true/false)"
+    required: false
+    default: "false"
+
+  include_archived:
+    description: "Include archived repos (true/false)"
+    required: false
+    default: "false"
+
+runs:
+  using: "node20"
+  main: "index.js"

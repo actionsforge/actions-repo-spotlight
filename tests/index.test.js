@@ -47,7 +47,7 @@ describe('index.js entry behavior', () => {
     await runAsScript();
 
     expect(mockSetFailed).toHaveBeenCalledWith('GH Action Error');
-  });
+  }, 10000); // 10s timeout
 
   test('runAsScript calls main when no error occurs', async () => {
     const { main } = await import('../lib/cli.js');

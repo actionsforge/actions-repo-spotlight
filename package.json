@@ -31,8 +31,7 @@
   "homepage": "https://github.com/actionsforge/actions-repo-spotlight#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0",
-    "dotenv": "^16.5.0"
+    "@actions/github": "^6.0.0"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^3.1.1",

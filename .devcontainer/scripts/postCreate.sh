@@ -6,6 +6,7 @@ echo "🔍 Environment Information:"
 echo "Node.js version: $(node -v)"
 echo "npm version: $(npm -v)"
 echo "TypeScript version: $(npx tsc --version)"
+echo "Environment: ${NODE_ENV:-development}"
 
 # Verify Node.js version
 echo "🔍 Checking Node.js version..."
@@ -30,6 +31,20 @@ if [ -f "package.json" ]; then
   echo "🔨 Building action..."
   npm run build || echo "⚠️ Build failed, but continuing..."
 
+  # Run tests based on environment and TEST_STAGE
+  echo "🧪 Running tests..."
+  if [ "${TEST_STAGE:-quick}" = "quick" ]; then
+    echo "🔍 Running quick test suite..."
+    npm test || echo "⚠️ Quick tests failed, but continuing..."
+  else
+    echo "🔍 Running full test suite..."
+    # Run unit tests
+    npm test || echo "⚠️ Unit tests failed, but continuing..."
+
+    # Run action-specific tests
+    ./.devcontainer/scripts/test-action.sh || echo "⚠️ Action tests failed, but continuing..."
+  fi
+
   echo "🔒 Security audit (non-blocking)..."
   npm audit || echo "⚠️ Audit issues found, but not blocking container creation"
 
@@ -38,8 +53,14 @@ if [ -f "package.json" ]; then
 
   echo "✅ Dev container setup complete!"
   echo "💡 Available commands:"
-  echo "   - npm test: Run tests"
+  echo "   - npm test: Run unit tests"
+  echo "   - npm run test:action: Run action-specific tests"
+  echo "   - npm run test:all: Run all tests"
   echo "   - npm run dev: Start development mode"
   echo "   - npm run build: Build the action"
   echo "   - act: Run GitHub Actions locally"
+  echo ""
+  echo "💡 Environment variables:"
+  echo "   - TEST_STAGE=quick|full: Control test depth"
+  echo "   - NODE_ENV=development|production: Set environment"
 fi

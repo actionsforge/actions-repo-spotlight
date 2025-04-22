@@ -9,6 +9,7 @@ module.exports = defineConfig({
   dts: true,
   sourcemap: true,
   treeshake: true,
-  external: ['@actions/core', '@actions/github', '@octokit/rest', 'esbuild'],
-  platform: 'node'
+  external: ['esbuild'],
+  platform: 'node',
+  noExternal: ['@actions/core', '@actions/github', '@octokit/rest']
 });

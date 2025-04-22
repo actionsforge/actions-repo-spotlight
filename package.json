@@ -20,7 +20,11 @@
   "scripts": {
     "build": "tsup",
     "start": "node dist/index.js",
-    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' vitest run",
+    "test": "vitest run",
+    "test:action": "./.devcontainer/scripts/test-action.sh",
+    "test:all": "npm test && npm run test:action",
+    "test:quick": "TEST_STAGE=quick npm test",
+    "test:full": "TEST_STAGE=full npm run test:all",
     "dev": "vitest watch",
     "prepare": "npm run build",
     "typecheck": "tsc --noEmit"

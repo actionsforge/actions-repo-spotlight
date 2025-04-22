@@ -68,7 +68,7 @@ interface RepoTrafficData {
  * @throws {ValidationError} When input validation fails
  */
 export async function spotlightRepos(
-  octokit: InstanceType<typeof Octokit>,
+  octokit: Octokit,
   username: string,
   {
     delay = 300,

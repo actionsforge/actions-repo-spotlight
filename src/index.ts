@@ -128,7 +128,7 @@ export function getToken(): string {
   const token =
     process.env.GH_SPOTLIGHT_TOKEN ||
     process.env.GITHUB_TOKEN ||
-    core.getInput?.('token') ||
+    (core.getInput && core.getInput('token')) ||
     getArg('--token');
 
   if (!token) {

@@ -48,7 +48,7 @@ Store the token as a secret named `GH_SPOTLIGHT_TOKEN` in your repository or org
 
 ## 🧩 Example Output
 
-```
+```plaintext
 📊 Top 6 repositories by views:
 1. username/project-one — 120 views
 2. username/project-two — 75 views
@@ -59,14 +59,9 @@ Store the token as a secret named `GH_SPOTLIGHT_TOKEN` in your repository or org
 
 ## ❓ FAQ
 
-> **Does this change my GitHub profile or pins?**
-> No — this action only reads traffic stats. It does not modify pinned repositories.
-
-> **Can I use this for private repositories?**
-> Yes — as long as your token has `repo` scope.
-
-> **Can I run this from the command line instead of GitHub Actions?**
-> Yes. You can run `node index.js`.
+> **Does this change my GitHub profile or pins?** No — this action only reads traffic stats. It does not modify pinned repositories.
+> **Can I use this for private repositories?** Yes — as long as your token has `repo` scope.
+> **Can I run this from the command line instead of GitHub Actions?** Yes. You can run `node index.js`.
 
 ---
 

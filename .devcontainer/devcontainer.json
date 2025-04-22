@@ -1,14 +1,13 @@
 {
-  "name": "DIND with Node.js",
+  "name": "GitHub Action Development",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
   "features": {
     "ghcr.io/devcontainers-extra/features/act:1": {},
     "ghcr.io/devcontainers-extra/features/curl-apt-get:1": {},
-    "ghcr.io/devcontainers-extra/features/jest:2": {},
     "ghcr.io/devcontainers-extra/features/typescript:2": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
+      "version": "20.10.0"
     }
   },
   "customizations": {
@@ -17,16 +16,21 @@
         "dbaeumer.vscode-eslint",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
-        "ms-vscode.vscode-typescript-next"
+        "ms-vscode.vscode-typescript-next",
+        "ms-azuretools.vscode-docker"
       ],
       "settings": {
         "editor.formatOnSave": true,
         "files.eol": "\n",
         "javascript.format.enable": true,
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "typescript.tsdk": "node_modules/typescript/lib"
       }
     }
   },
   "postCreateCommand": ".devcontainer/scripts/postCreate.sh",
-  "runArgs": ["--privileged"]
+  "runArgs": ["--privileged"],
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ]
 }

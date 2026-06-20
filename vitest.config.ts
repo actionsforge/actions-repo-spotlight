@@ -33,6 +33,6 @@ export default defineConfig({
       }
     },
     pool: 'threads',
-    isolate: false
+    isolate: true
   }
 });

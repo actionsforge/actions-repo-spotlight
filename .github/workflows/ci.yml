@@ -34,7 +34,7 @@ jobs:
           GITHUB_USER: mock-user
 
       - name: Security audit
-        run: npm audit || true
+        run: npm audit --audit-level=high
 
       - name: Check for outdated dependencies
         run: npm outdated || true

@@ -3,22 +3,7 @@ import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { main } from '../lib/cli.js';
-import '../tests/setup.mjs';
 
-vi.mock('@actions/core', () => ({
-  getInput: vi.fn(),
-  setFailed: vi.fn(),
-  info: vi.fn(),
-  warning: vi.fn(),
-  debug: vi.fn(),
-  error: vi.fn(),
-  setOutput: vi.fn(),
-  setSecret: vi.fn()
-}));
-vi.mock('@actions/github', () => ({
-  context: { actor: 'test-user' },
-  getOctokit: vi.fn().mockReturnValue({})
-}));
 vi.mock('../src/spotlight.js', () => ({
   spotlightRepos: vi.fn().mockResolvedValue([])
 }));

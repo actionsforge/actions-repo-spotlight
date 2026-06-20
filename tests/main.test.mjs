@@ -15,9 +15,11 @@ vi.mock('@actions/core', () => ({
 
 // Mock Octokit
 vi.mock('@octokit/rest', () => ({
-  Octokit: vi.fn(() => ({
+  Octokit: vi.fn(function MockOctokit() {
+    return {
     // Mock any Octokit methods needed
-  }))
+    };
+  })
 }));
 
 // Mock spotlight

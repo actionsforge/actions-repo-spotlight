@@ -1,30 +1,25 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as core from '@actions/core';
 import { getBoolInputOrFlag } from '../lib/cli.js';
 
 describe('CLI core functionality', () => {
   beforeEach(() => {
-    vi.resetModules();
-    vi.clearAllMocks();
-  });
-
-  afterEach(() => {
     vi.clearAllMocks();
   });
 
   describe('getBoolInputOrFlag', () => {
     it('returns true when input is "true"', () => {
-      vi.spyOn(core, 'getInput').mockReturnValue('true');
+      vi.mocked(core.getInput).mockReturnValue('true');
       expect(getBoolInputOrFlag('test', '--test')).toBe(true);
     });
 
     it('returns false when input is "false"', () => {
-      vi.spyOn(core, 'getInput').mockReturnValue('false');
+      vi.mocked(core.getInput).mockReturnValue('false');
       expect(getBoolInputOrFlag('test', '--test')).toBe(false);
     });
 
     it('returns true when flag is present in argv', () => {
-      vi.spyOn(core, 'getInput').mockReturnValue(undefined);
+      vi.mocked(core.getInput).mockReturnValue('');
       const originalArgv = process.argv;
       process.argv = ['node', 'script.js', '--test'];
       expect(getBoolInputOrFlag('test', '--test')).toBe(true);
@@ -32,7 +27,7 @@ describe('CLI core functionality', () => {
     });
 
     it('returns false when flag is not present in argv and input is undefined', () => {
-      vi.spyOn(core, 'getInput').mockReturnValue(undefined);
+      vi.mocked(core.getInput).mockReturnValue('');
       const originalArgv = process.argv;
       process.argv = ['node', 'script.js'];
       expect(getBoolInputOrFlag('test', '--test')).toBe(false);
@@ -40,12 +35,12 @@ describe('CLI core functionality', () => {
     });
 
     it('handles case-insensitive input', () => {
-      vi.spyOn(core, 'getInput').mockReturnValue('TRUE');
+      vi.mocked(core.getInput).mockReturnValue('TRUE');
       expect(getBoolInputOrFlag('test', '--test')).toBe(true);
     });
 
     it('handles empty input', () => {
-      vi.spyOn(core, 'getInput').mockReturnValue('');
+      vi.mocked(core.getInput).mockReturnValue('');
       const originalArgv = process.argv;
       process.argv = ['node', 'script.js'];
       expect(getBoolInputOrFlag('test', '--test')).toBe(false);

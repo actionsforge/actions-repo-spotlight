@@ -19,15 +19,17 @@ vi.mock('@actions/core', () => ({
 
 // Mock Octokit
 vi.mock('@octokit/rest', () => ({
-  Octokit: vi.fn().mockImplementation(() => ({
-    paginate: vi.fn(),
-    rest: {
-      repos: {
-        listForUser: vi.fn(),
-        getViews: vi.fn()
+  Octokit: vi.fn().mockImplementation(function MockOctokit() {
+    return {
+      paginate: vi.fn(),
+      rest: {
+        repos: {
+          listForUser: vi.fn(),
+          getViews: vi.fn()
+        }
       }
-    }
-  }))
+    };
+  })
 }));
 
 describe('spotlight core functionality', () => {

@@ -1,8 +1,12 @@
 import { vi } from 'vitest';
 
-// Mock environment variables
-process.env.GITHUB_TOKEN = 'test-token';
-process.env.GITHUB_REPOSITORY = 'test-org/test-repo';
+// Mock environment variables for unit tests (keep CI reusable generic)
+process.env.GITHUB_TOKEN = process.env.GITHUB_TOKEN || 'test-token';
+process.env.GH_SPOTLIGHT_TOKEN =
+  process.env.GH_SPOTLIGHT_TOKEN || 'test-token';
+process.env.GITHUB_USER = process.env.GITHUB_USER || 'mock-user';
+process.env.GITHUB_REPOSITORY =
+  process.env.GITHUB_REPOSITORY || 'test-org/test-repo';
 
 // Dummy repository data
 const dummyRepos = [

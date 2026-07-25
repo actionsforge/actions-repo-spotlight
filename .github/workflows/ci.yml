@@ -15,5 +15,3 @@ jobs:
       node-version: '20'
       coverage: true
       audit: true
-      test-token: test-token
-      test-github-user: mock-user

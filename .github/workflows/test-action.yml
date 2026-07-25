@@ -1,49 +1,32 @@
-name: Test Action (Manual)
+name: Test Action
 
 on:
+  push:
+    branches:
+      - main
+  pull_request:
   workflow_dispatch:
-    inputs:
-      username:
-        description: 'GitHub username to test with'
-        required: true
-        default: 'test-user'
-      token:
-        description: 'GitHub token to use for testing'
-        required: true
-        default: 'test-token'
-      limit:
-        description: 'Maximum number of repositories to show'
-        required: false
-        default: '6'
-      min-views:
-        description: 'Minimum views to skip repositories'
-        required: false
-        default: '0'
-      include-forks:
-        description: 'Include forked repositories'
-        required: false
-        type: boolean
-        default: false
-      include-archived:
-        description: 'Include archived repositories'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   test-action:
     name: Test Action
     runs-on: ubuntu-latest
+    # Repo secret is unavailable on fork PRs
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Test action
+      - name: Run action
         uses: ./
         with:
-          username: ${{ inputs.username }}
-          token: ${{ inputs.token }}
-          limit: ${{ inputs.limit }}
-          min-views: ${{ inputs.min-views }}
-          include-forks: ${{ inputs.include-forks }}
-          include-archived: ${{ inputs.include-archived }}
+          token: ${{ secrets.GH_SPOTLIGHT_TOKEN }}
+          limit: '3'
+          delay: '300'
+          min_views: '0'
+          include_forks: 'false'
+          include_archived: 'false'

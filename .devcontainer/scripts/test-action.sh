@@ -26,15 +26,11 @@ node dist/index.cjs --token test-token --username test-user || {
 if command -v act &> /dev/null; then
     if docker info &> /dev/null; then
         echo "🔍 Testing with act (local testing only)..."
-        # Use -n to skip image selection and -P to specify the image
-        # Pass inputs directly as command-line arguments
+        # Requires GH_SPOTLIGHT_TOKEN in the environment or .secrets
         act -n -W .github/workflows/test-action.yml workflow_dispatch \
             -P ubuntu-latest=nektos/act-environments-ubuntu:18.04 \
-            --input username=test-user \
-            --input token=test-token \
-            --input limit=6 \
-            --input min-views=0 || {
-            echo "⚠️ act test failed (expected with test token)"
+            -s GH_SPOTLIGHT_TOKEN="${GH_SPOTLIGHT_TOKEN:-test-token}" || {
+            echo "⚠️ act test failed (expected without a real GH_SPOTLIGHT_TOKEN)"
         }
     else
         echo "⚠️ Docker is not accessible. Skipping act tests."
@@ -46,4 +42,4 @@ else
 fi
 
 echo "✅ Tests completed"
-echo "Note: For GitHub Actions workflow testing, use the workflow_dispatch interface in the GitHub UI"
+echo "Note: CI runs Test Action on push/PR using secrets.GH_SPOTLIGHT_TOKEN"
